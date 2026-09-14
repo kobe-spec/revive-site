@@ -19,20 +19,20 @@
   </noscript>
   <script>
   (function () {
-    var tries = 0;
-    function inject() {
-      tries++;
-      if (document.querySelector('chat-widget')) return;
-      if (!document.body) { if (tries < 40) setTimeout(inject, 500); return; }
+    var done = false, waits = 0;
+    function ready() {
+      if (done) return;
+      if (document.querySelector('script[data-widget-id]') || document.querySelector('chat-widget')) { done = true; return; }
+      if (!document.body) { if (waits++ < 60) setTimeout(ready, 300); return; }
+      done = true;
       var s = document.createElement('script');
       s.src = 'https://widgets.leadconnectorhq.com/loader.js';
       s.setAttribute('data-resources-url', 'https://widgets.leadconnectorhq.com/chat-widget/loader.js');
       s.setAttribute('data-widget-id', '6aa83b3df0636a40b9a48bac');
       s.setAttribute('data-source', 'WEB_USER');
       document.body.appendChild(s);
-      if (tries < 40) setTimeout(inject, 1500);
     }
-    setTimeout(inject, 1200);
+    setTimeout(ready, 1500);
   })();
   </script>
 </head>
