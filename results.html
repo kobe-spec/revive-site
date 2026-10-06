@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Results | Revive Client Stories</title>
+<meta name="description" content="Real results from Revive clients. See how Julie Romero of Hands in the Sands Mobile Massage Therapy got 11 bookings in the first 5 days of her first campaign to existing clients.">
+<link rel="canonical" href="https://revivereputation.com/results">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Revive">
+<meta property="og:title" content="Revive Results | Real stories from local businesses">
+<meta property="og:description" content="11 bookings in 5 days from one campaign to existing clients. Julie Romero, Hands in the Sands Mobile Massage Therapy.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0B1230">
+<link rel="icon" href="brand-kit/logos/revive-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { max-width: 100%; overflow-x: hidden; }
+  body { margin: 0; max-width: 100%; overflow-x: hidden; background: #F6F7FB; color: #0E1530; font-family: Manrope, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #2F5FE0; text-decoration: none; }
+  a:hover { color: #1E46B8; }
+  h1, h2, h3, p, ul, figure, blockquote, figcaption { margin: 0; }
+  ul { padding: 0; list-style: none; }
+  :focus-visible { outline: 3px solid #6A93F8; outline-offset: 2px; border-radius: 8px; }
+</style>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0B1230"></rect><rect x="30" y="30" width="40" height="40" rx="12" fill="#3B6EF5"></rect></svg></template>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6aa83b3df0636a40b9a48bac" data-source="WEB_USER"></script>
+</helmet>
+
+<div style="max-width: 100%; overflow-x: hidden;">
+<dc-import name="Site Header" active="results" hint-size="100%,69px"></dc-import>
+
+<main>
+  <section aria-labelledby="r-title" style="background: #0B1230; color: #F4F6F5; padding: 64px 20px 72px;">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; gap: 18px;">
+      <p style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8FADF8;">Results</p>
+      <h1 id="r-title" style="font-size: clamp(34px, 6.4vw, 58px); line-height: 1.03; letter-spacing: -0.04em; font-weight: 800; max-width: 18ch;">Real businesses. Real customers. Real words.</h1>
+      <p style="font-size: 18px; line-height: 1.6; color: rgba(244,246,245,0.78); max-width: 52ch;">Everything on this page comes from actual Revive clients, shared with their permission. We’ll add stories as they come in rather than fill the page with made-up ones.</p>
+    </div>
+  </section>
+
+  <sc-for list="{{ cases }}" as="c" hint-placeholder-count="1">
+    <section aria-label="{{ c.business }}" style="padding: 72px 20px; border-bottom: 1px solid #E4E7EF;">
+      <div style="max-width: 1160px; margin: 0 auto; display: grid; gap: 36px;">
+        <div style="display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); align-items: start;">
+          <div style="display: grid; gap: 18px;">
+            <p style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #2F5FE0;">Case study · {{ c.type }}</p>
+            <h2 style="font-size: clamp(26px, 4vw, 38px); line-height: 1.1; letter-spacing: -0.035em; font-weight: 800;">{{ c.business }}</h2>
+            <p style="font-size: 17px; line-height: 1.65; color: #475069; max-width: 52ch;">{{ c.summary }}</p>
+            <div style="display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));">
+              <sc-for list="{{ c.stats }}" as="s" hint-placeholder-count="2">
+                <div style="border: 1px solid #E4E7EF; border-radius: 16px; padding: 16px 18px; background: #FFFFFF;">
+                  <p style="font-size: 32px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1;">{{ s.value }}</p>
+                  <p style="font-size: 14px; line-height: 1.45; color: #5F6782; margin-top: 4px;">{{ s.label }}</p>
+                </div>
+              </sc-for>
+            </div>
+            <p style="font-size: 13px; line-height: 1.55; color: #5F6782;">Numbers reported by the client. Every business, list and offer is different, so results vary.</p>
+          </div>
+          <figure style="border-radius: 20px; background: #0B1230; color: #F4F6F5; padding: 28px; display: grid; gap: 18px;">
+            <blockquote style="font-size: clamp(20px, 2.6vw, 25px); line-height: 1.4; font-weight: 700; letter-spacing: -0.015em;">“{{ c.quote }}”</blockquote>
+            <figcaption style="display: flex; align-items: center; gap: 12px;">
+              <span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 99px; background: #DCE5FE; color: #2F5FE0; display: grid; place-items: center; font-weight: 800; font-size: 15px;">JR</span>
+              <span><span style="display: block; font-weight: 800; font-size: 15.5px;">{{ c.person }}</span><span style="display: block; font-size: 14px; color: rgba(244,246,245,0.7);">{{ c.business }}</span></span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </sc-for>
+
+  <section aria-labelledby="video-title" style="background: #FFFFFF; padding: 72px 20px; border-bottom: 1px solid #E4E7EF;">
+    <div style="max-width: 960px; margin: 0 auto; display: grid; gap: 22px;">
+      <h2 id="video-title" style="font-size: clamp(24px, 3.6vw, 32px); letter-spacing: -0.03em; font-weight: 800;">Hear it from Julie</h2>
+      <div style="border-radius: 20px; overflow: hidden; background: #0B1230; aspect-ratio: 16 / 9; position: relative;">
+        <sc-if value="{{ hasVideo }}" hint-placeholder-val="{{ false }}">
+          <iframe src="{{ videoUrl }}" title="Julie Romero video testimonial" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"></iframe>
+        </sc-if>
+        <sc-if value="{{ noVideo }}" hint-placeholder-val="{{ true }}">
+          <div style="position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 20px; color: #F4F6F5; background: radial-gradient(70% 90% at 50% 40%, #1A2766, #0B1230);">
+            <div style="display: grid; gap: 12px; justify-items: center;">
+              <span aria-hidden="true" style="width: 68px; height: 68px; border-radius: 99px; background: #FFFFFF; display: grid; place-items: center;"><span style="width: 0; height: 0; border-left: 19px solid #3B6EF5; border-top: 12px solid transparent; border-bottom: 12px solid transparent; margin-left: 5px;"></span></span>
+              <p style="font-size: 16px; font-weight: 700;">Julie Romero · Video testimonial</p>
+              <p style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,246,245,0.6);">Video coming soon</p>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+      <ul style="display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));">
+        <sc-for list="{{ quotes }}" as="q" hint-placeholder-count="2">
+          <li style="border: 1px solid #E4E7EF; border-radius: 16px; padding: 20px; background: #F6F7FB; display: grid; gap: 10px;">
+            <p style="font-size: 16.5px; line-height: 1.55; color: #2B3352;">“{{ q.quote }}”</p>
+            <p style="font-size: 14px; font-weight: 700; color: #5F6782;">{{ q.name }}</p>
+          </li>
+        </sc-for>
+      </ul>
+    </div>
+  </section>
+
+  <dc-import name="Client Texts" hint-size="100%,900px"></dc-import>
+
+  <section style="background: #0B1230; color: #F4F6F5; padding: 72px 20px; text-align: center;">
+    <div style="max-width: 720px; margin: 0 auto; display: grid; gap: 16px; justify-items: center;">
+      <h2 style="font-size: clamp(28px, 5vw, 44px); line-height: 1.06; letter-spacing: -0.04em; font-weight: 800; max-width: 18ch;">What could your customer list do?</h2>
+      <p style="font-size: 17px; line-height: 1.6; color: rgba(244,246,245,0.78); max-width: 44ch;">Tell us about your business on a short call. We’ll be straight with you about whether it fits.</p>
+      <a href="{{ bookHref }}" onClick="{{ onBook }}" style="display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px; border-radius: 12px; background: #3B6EF5; color: #FFFFFF; font-weight: 800; font-size: 17px; width: 100%; max-width: 340px; margin-top: 6px;" style-hover="background: #2F5FE0; color: #FFFFFF;">Book a 15-Minute Call</a>
+    </div>
+  </section>
+</main>
+
+<dc-import name="Site Footer" hint-size="100%,420px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { cfg: null };
+  componentDidMount() {
+    import(new URL('./revive-config.js', document.baseURI).href).then(cfg => this.setState({ cfg }));
+  }
+  renderVals() {
+    const cfg = this.state.cfg;
+    const t = cfg ? cfg.TESTIMONIALS : [];
+    const cases = cfg ? cfg.CASE_STUDIES.map(c => ({ ...c, quote: (t.find(q => q.id === c.quoteId) || {}).quote })) : [];
+    const used = new Set(cfg ? cfg.CASE_STUDIES.map(c => c.quoteId) : []);
+    const video = cfg ? cfg.JULIE_VIDEO_URL : '';
+    return {
+      cases, quotes: t.filter(q => !used.has(q.id)),
+      hasVideo: !!video, noVideo: !video, videoUrl: video,
+      bookHref: cfg ? cfg.bookHref() : 'mailto:kobe@revivereputation.com',
+      onBook: (e) => {
+        if (cfg && cfg.BOOK_URL) return;
+        const host = document.querySelector('chat-widget');
+        const btn = host && host.shadowRoot && host.shadowRoot.querySelector('button, [role="button"]');
+        if (btn) { e.preventDefault(); btn.click(); }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

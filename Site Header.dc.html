@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>@media (max-width: 859px){.rv-desk{display:none !important}} @media (min-width: 860px){.rv-mob{display:none !important}} @media (max-width: 399px){.rv-long{display:none !important}} @media (min-width: 400px){.rv-short{display:none !important}}</style></helmet>
+<header style="position: sticky; top: 0; z-index: 40; background: rgba(11,18,48,0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(244,246,245,0.08); font-family: Manrope, Helvetica, Arial, sans-serif;">
+  <div style="max-width: 1160px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+    <a href="./" aria-label="Revive home" style="display: flex; align-items: center; gap: 9px; color: #F4F6F5; text-decoration: none; min-height: 44px;">
+      <img src="brand-kit/logos/revive-mark.svg" alt="" width="26" height="26" style="display: block; width: 26px; height: 26px;">
+      <span style="font-weight: 800; font-size: 19px; letter-spacing: -0.03em;">Revive</span>
+    </a>
+    <nav class="rv-desk" aria-label="Main" style="display: flex; align-items: center; gap: 4px;">
+        <sc-for list="{{ links }}" as="l" hint-placeholder-count="4">
+          <a href="{{ l.href }}" aria-current="{{ l.current }}" style="padding: 10px 14px; border-radius: 10px; font-size: 15px; font-weight: {{ l.weight }}; color: {{ l.color }}; text-decoration: none;" style-hover="color: #FFFFFF; background: rgba(244,246,245,0.06);">{{ l.label }}</a>
+        </sc-for>
+      </nav>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="{{ bookHref }}" onClick="{{ onBook }}" style="display: flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 12px; background: #3B6EF5; color: #FFFFFF; font-weight: 700; font-size: 14.5px; text-decoration: none; white-space: nowrap;" style-hover="background: #2F5FE0; color: #FFFFFF;"><span class="rv-long">Book a 15-Minute Call</span><span class="rv-short">Book a Call</span></a>
+      <button class="rv-mob" type="button" onClick="{{ toggle }}" aria-expanded="{{ open }}" aria-controls="mobile-nav" aria-label="Menu" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(244,246,245,0.18); background: transparent; color: #F4F6F5; display: grid; place-items: center; cursor: pointer; padding: 0;">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+        </button>
+    </div>
+  </div>
+  <sc-if value="{{ showMenu }}" hint-placeholder-val="{{ false }}">
+    <nav class="rv-mob" id="mobile-nav" aria-label="Main" style="border-top: 1px solid rgba(244,246,245,0.08); padding: 8px 20px 16px; display: grid; gap: 2px;">
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="4">
+        <a href="{{ l.href }}" aria-current="{{ l.current }}" style="display: flex; align-items: center; min-height: 48px; padding: 0 4px; font-size: 17px; font-weight: {{ l.weight }}; color: {{ l.color }}; text-decoration: none; border-bottom: 1px solid rgba(244,246,245,0.06);">{{ l.label }}</a>
+      </sc-for>
+    </nav>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:80},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;services&quot;,&quot;results&quot;,&quot;about&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { w: typeof window !== 'undefined' ? window.innerWidth : 1200, open: false, cfg: null };
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: document.documentElement.clientWidth || window.innerWidth });
+    window.addEventListener('resize', this.onResize);
+    this.ro = new ResizeObserver(this.onResize); this.ro.observe(document.documentElement);
+    this.onResize();
+    import(new URL('./revive-config.js', document.baseURI).href).then(cfg => this.setState({ cfg }));
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); if (this.ro) this.ro.disconnect(); }
+  renderVals() {
+    const active = this.props.active ?? 'home';
+    const cfg = this.state.cfg;
+    const desktop = this.state.w >= 860;
+    const links = [
+      ['home', 'Home', './'],
+      ['services', 'Services', 'services.html'],
+      ['results', 'Results', 'results.html'],
+      ['about', 'About', 'about.html'],
+    ].map(([id, label, href]) => ({ label, href, current: id === active ? 'page' : undefined, color: id === active ? '#FFFFFF' : 'rgba(244,246,245,0.72)', weight: id === active ? 700 : 600 }));
+    return {
+      desktop, mobile: !desktop, links, open: this.state.open,
+      showMenu: !desktop && this.state.open,
+      ctaLabel: this.state.w < 400 ? 'Book a Call' : 'Book a 15-Minute Call',
+      bookHref: cfg ? cfg.bookHref() : 'mailto:kobe@revivereputation.com',
+      toggle: () => this.setState(s => ({ open: !s.open })),
+      onBook: (e) => {
+        if (cfg && cfg.BOOK_URL) return;
+        const host = document.querySelector('chat-widget');
+        const btn = host && host.shadowRoot && host.shadowRoot.querySelector('button, [role="button"]');
+        if (btn) { e.preventDefault(); btn.click(); }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

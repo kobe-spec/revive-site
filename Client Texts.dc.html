@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<section aria-labelledby="ct-title" aria-roledescription="carousel" style="background: #0B1230; color: #F4F6F5; padding: 80px 0; position: relative; overflow: hidden; font-family: Manrope, Helvetica, Arial, sans-serif;">
+  <div style="max-width: 1160px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 32px;">
+    <div style="max-width: 620px; display: grid; gap: 14px;">
+      <p style="margin: 0; display: flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8FADF8;"><span style="width: 7px; height: 7px; border-radius: 99px; background: #3FBF6E; display: block;"></span>Real screenshots</p>
+      <h2 id="ct-title" style="margin: 0; font-size: clamp(28px, 4.6vw, 44px); line-height: 1.06; letter-spacing: -0.035em; font-weight: 800;">Texts we actually get from clients.</h2>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: rgba(244,246,245,0.78);">Straight from our phone, unedited. Names and numbers cropped out for privacy. Tap any message to see it full size.</p>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button type="button" aria-label="Previous messages" onClick="{{ prev }}" style="width: 48px; height: 48px; border-radius: 99px; border: 1px solid rgba(244,246,245,0.22); background: transparent; color: #F4F6F5; font-size: 20px; cursor: pointer; display: grid; place-items: center; padding: 0;" style-hover="background: rgba(244,246,245,0.08);">←</button>
+      <button type="button" aria-label="Next messages" onClick="{{ next }}" style="width: 48px; height: 48px; border-radius: 99px; border: 0; background: #3B6EF5; color: #FFFFFF; font-size: 20px; cursor: pointer; display: grid; place-items: center; padding: 0;" style-hover="background: #2F5FE0;">→</button>
+    </div>
+  </div>
+
+  <div ref="{{ trackRef }}" onScroll="{{ onScroll }}" onPointerDown="{{ stop }}" onMouseEnter="{{ pause }}" onMouseLeave="{{ resume }}" tabIndex="0" aria-label="Client text messages" style="display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 max(20px, calc((100vw - 1120px) / 2)); padding: 6px max(20px, calc((100vw - 1120px) / 2)) 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; outline-offset: -3px;">
+    <sc-for list="{{ shots }}" as="s" hint-placeholder-count="4">
+      <figure aria-roledescription="slide" aria-label="{{ s.label }}" style="margin: 0; flex: 0 0 auto; scroll-snap-align: start; display: grid; gap: 12px;">
+        <button type="button" onClick="{{ s.open }}" aria-label="View full size: {{ s.alt }}" style="display: block; padding: 0; border: 1px solid rgba(244,246,245,0.12); border-radius: 20px; overflow: hidden; background: #0A0D0C; cursor: zoom-in; width: {{ s.w }}; max-width: 84vw; height: 280px; transition: transform 0.2s ease, border-color 0.2s ease;" style-hover="transform: translateY(-3px); border-color: rgba(106,147,248,0.55);">
+          <img src="{{ s.src }}" alt="{{ s.alt }}" loading="lazy" style="display: block; width: 100%; height: 100%; object-fit: contain;">
+        </button>
+        <figcaption style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: rgba(244,246,245,0.7);">
+          <span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 99px; background: #DCE5FE; color: #2F5FE0; display: grid; place-items: center; font-size: 11px; font-weight: 800;">✓</span>Revive client · text message
+        </figcaption>
+      </figure>
+    </sc-for>
+  </div>
+
+  <div style="max-width: 1160px; margin: 8px auto 0; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+    <div style="display: flex; gap: 6px;" aria-hidden="true">
+      <sc-for list="{{ dots }}" as="d" hint-placeholder-count="7">
+        <span style="height: 6px; width: {{ d.w }}; border-radius: 99px; background: {{ d.bg }}; transition: width 0.25s ease, background 0.25s ease; display: block;"></span>
+      </sc-for>
+    </div>
+    <button type="button" onClick="{{ openOriginal }}" style="min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: #8FADF8; font-family: inherit; font-size: 14.5px; font-weight: 700; cursor: pointer;" style-hover="color: #FFFFFF;">See the full original screenshot →</button>
+  </div>
+
+  <sc-if value="{{ lightbox }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="Screenshot full size" onClick="{{ close }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(5,8,22,0.92); display: grid; place-items: center; padding: 24px; cursor: zoom-out;">
+      <img src="{{ lightboxSrc }}" alt="{{ lightboxAlt }}" style="display: block; max-width: min(100%, 1000px); max-height: 82vh; border-radius: 16px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);">
+      <button type="button" onClick="{{ close }}" aria-label="Close" style="position: fixed; top: 16px; right: 16px; width: 48px; height: 48px; border-radius: 99px; border: 1px solid rgba(244,246,245,0.3); background: rgba(11,18,48,0.8); color: #FFFFFF; font-size: 20px; cursor: pointer;">✕</button>
+    </div>
+  </sc-if>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:620}}">
+class Component extends DCLogic {
+  state = { active: 0, box: null };
+  trackRef = React.createRef();
+  SHOTS = [
+    ['busier', 480 / 313, 'Not sure if they were leads or coincidence, but two people booked. I feel busier than I’ve been since before the pandemic. I’m so very pleased with all of this. Thank you so much!'],
+    ['1400', 554 / 174, '$1,400 after the 20% discount'],
+    ['crushing-v2', 346 / 352, 'Fantastic. I love the two hour bookings. That’s $200 bucks. He booked a 90. You. R. Crushing. It. Right?'],
+    ['quit-job', 554 / 190, 'If I’m being truthful, I’m already figuring out when I can quit this part-time job.'],
+    ['blown-away', 304 / 350, 'I like to stay at or about 4 hours of hands on time per day. I have ONE single appt slot available this week. I’m blown away.'],
+    ['super-impressed', 554 / 190, 'I’m super impressed. The next two weeks look great.'],
+    ['quickly', 407 / 214, 'I’m so impressed with how quickly this is working. I’m already looking at cutting back more hours so I can focus on the business. This is exactly what I needed. Thank you!'],
+  ];
+  componentDidMount() {
+    this.reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.onKey = (e) => { if (e.key === 'Escape' && this.state.box) this.setState({ box: null }); };
+    window.addEventListener('keydown', this.onKey);
+    this.resume();
+  }
+  componentWillUnmount() { clearInterval(this.auto); window.removeEventListener('keydown', this.onKey); }
+  items() { const t = this.trackRef.current; return t ? Array.from(t.querySelectorAll('figure')) : []; }
+  go(i) {
+    const t = this.trackRef.current, els = this.items(); if (!t || !els.length) return;
+    const n = (i + els.length) % els.length;
+    const pad = parseFloat(getComputedStyle(t).paddingLeft) || 0;
+    t.scrollTo({ left: els[n].offsetLeft - pad, behavior: this.reduce ? 'auto' : 'smooth' });
+  }
+  pause = () => { clearInterval(this.auto); this.auto = null; };
+  resume = () => {
+    if (this.reduce || this.stopped) return;
+    clearInterval(this.auto);
+    this.auto = setInterval(() => this.go(this.state.active + 1), 4500);
+  };
+  stop = () => { this.stopped = true; this.pause(); };
+  renderVals() {
+    const shots = this.SHOTS.map(([id, ar, alt], i) => ({
+      src: `assets/client-texts/${id}.png`, alt: 'Text from a Revive client: ' + alt,
+      label: `${i + 1} of ${this.SHOTS.length}`,
+      w: Math.round(Math.min(560, Math.max(250, ar * 280))) + 'px',
+      open: () => { this.stop(); this.setState({ box: { src: `assets/client-texts/${id}.png`, alt } }); },
+    }));
+    return {
+      shots, trackRef: this.trackRef,
+      dots: shots.map((_, i) => ({ w: i === this.state.active ? '22px' : '6px', bg: i === this.state.active ? '#6A93F8' : 'rgba(244,246,245,0.25)' })),
+      prev: () => { this.stop(); this.go(this.state.active - 1); },
+      next: () => { this.stop(); this.go(this.state.active + 1); },
+      pause: this.pause, resume: this.resume, stop: this.stop,
+      onScroll: () => {
+        const t = this.trackRef.current; if (!t) return;
+        const pad = parseFloat(getComputedStyle(t).paddingLeft) || 0;
+        const els = this.items();
+        let best = 0, d = Infinity;
+        els.forEach((el, i) => { const x = Math.abs(el.offsetLeft - pad - t.scrollLeft); if (x < d) { d = x; best = i; } });
+        if (t.scrollLeft + t.clientWidth >= t.scrollWidth - 4) best = els.length - 1;
+        if (best !== this.state.active) this.setState({ active: best });
+      },
+      lightbox: !!this.state.box,
+      lightboxSrc: this.state.box ? this.state.box.src : '',
+      lightboxAlt: this.state.box ? this.state.box.alt : '',
+      openOriginal: () => { this.stop(); this.setState({ box: { src: 'assets/client-texts.jpeg', alt: 'Original screenshot of text messages from Revive clients' } }); },
+      close: () => this.setState({ box: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>
