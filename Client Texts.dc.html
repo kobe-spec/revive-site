@@ -86,10 +86,10 @@ class Component extends DCLogic {
   stop = () => { this.stopped = true; this.pause(); };
   renderVals() {
     const shots = this.SHOTS.map(([id, ar, alt], i) => ({
-      src: `assets/client-texts/${id}.png`, alt: 'Text from a Revive client: ' + alt,
+      src: `${id}.png`, alt: 'Text from a Revive client: ' + alt,
       label: `${i + 1} of ${this.SHOTS.length}`,
       w: Math.round(Math.min(560, Math.max(250, ar * 280))) + 'px',
-      open: () => { this.stop(); this.setState({ box: { src: `assets/client-texts/${id}.png`, alt } }); },
+      open: () => { this.stop(); this.setState({ box: { src: `${id}.png`, alt } }); },
     }));
     return {
       shots, trackRef: this.trackRef,
@@ -109,7 +109,7 @@ class Component extends DCLogic {
       lightbox: !!this.state.box,
       lightboxSrc: this.state.box ? this.state.box.src : '',
       lightboxAlt: this.state.box ? this.state.box.alt : '',
-      openOriginal: () => { this.stop(); this.setState({ box: { src: 'assets/client-texts.jpeg', alt: 'Original screenshot of text messages from Revive clients' } }); },
+      openOriginal: () => { this.stop(); this.setState({ box: { src: 'client-texts.jpeg', alt: 'Original screenshot of text messages from Revive clients' } }); },
       close: () => this.setState({ box: null }),
     };
   }
