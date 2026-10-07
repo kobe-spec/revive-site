@@ -24,6 +24,20 @@ export const CONTACT = {
 // testimonial video is uploaded. Empty = polished placeholder.
 export const JULIE_VIDEO_URL = 'https://share.descript.com/embed/alEs64EW6hY';
 
+// ── /julie case-study page ──────────────────────────────────────────────
+// Best: a direct vertical .mp4 link (enables poster + play/complete tracking).
+// If empty, the page falls back to the JULIE_VIDEO_URL embed above.
+export const JULIE_VIDEO_FILE = '';
+// Optional poster image (portrait, ~1080x1920) shown before the video plays.
+export const JULIE_VIDEO_POSTER = '';
+// Real campaign screenshots, shown in this order. Empty list = labeled placeholder.
+export const JULIE_CAMPAIGN_SCREENSHOTS = [
+  { src: 'julie-donna.jpg', w: 800, h: 819, caption: 'Replied within the hour asking for a time' },
+  { src: 'julie-brian.jpg', w: 800, h: 985, caption: 'Asked to book a birthday massage' },
+  { src: 'julie-kyle.jpg', w: 800, h: 982, caption: 'Missed the first text. The follow-up got a reply' },
+  { src: 'julie-ashley.jpg', w: 800, h: 962, caption: 'Booked after the follow-up reminder' },
+];
+
 export const TESTIMONIALS = [
   { id: 'julie-missing-link', quote: 'When Kobe showed up, it was like the missing link I didn\u2019t know I needed.', name: 'Julie Romero', business: 'Hands in the Sands Mobile Massage Therapy' },
   { id: 'julie-recommend', quote: 'If somebody was looking for someone to promote their business, I would absolutely recommend Revive.', name: 'Julie Romero', business: 'Hands in the Sands Mobile Massage Therapy' },
